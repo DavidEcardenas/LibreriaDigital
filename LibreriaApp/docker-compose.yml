@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  libreria-webapi:
+    image: libreria-webapi
+    container_name: libreria-webapi
+    build:
+      context: ./Libreria.WebApi
+      dockerfile: Dockerfile
+    ports:
+      - "8980:8080"
+    networks:
+      - mynetwork
+
+  libreriasqlserver:
+    image: mcr.microsoft.com/mssql/server:latest
+    container_name: libreriasqlserver
+    ports:
+      - "14330:1433"
+    environment:
+      - SA_PASSWORD=Abc.123456
+      - ACCEPT_EULA=Y
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge

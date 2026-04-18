@@ -15,14 +15,14 @@ namespace Libreria.WebApi.Controllers
             _context = context;
         }
 
-        // GET: api/users - Listar todos los usuarios
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/users/{id} - Obtener un usuario por ID
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -36,7 +36,7 @@ namespace Libreria.WebApi.Controllers
             return user;
         }
 
-        // GET: api/users/{id}/libros - Obtener libros de un usuario
+        
         [HttpGet("{id}/libros")]
         public async Task<ActionResult<IEnumerable<Libro>>> GetUserLibros(int id)
         {
@@ -54,11 +54,11 @@ namespace Libreria.WebApi.Controllers
             return libros;
         }
 
-        // POST: api/users - Registrar un nuevo usuario
+        
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            // Verificar si el correo ya existe
+           
             var existingUser = await _context.Users
                 .FirstOrDefaultAsync(u => u.Correo == user.Correo);
 
@@ -73,7 +73,6 @@ namespace Libreria.WebApi.Controllers
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
 
-        // PUT: api/users/{id} - Editar un usuario
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -88,7 +87,7 @@ namespace Libreria.WebApi.Controllers
                 return NotFound();
             }
 
-            // Actualizar campos
+          
             existingUser.Nombre = user.Nombre;
             existingUser.Apellido = user.Apellido;
             existingUser.Correo = user.Correo;
@@ -115,7 +114,6 @@ namespace Libreria.WebApi.Controllers
             return NoContent();
         }
 
-        // DELETE: api/users/{id} - Eliminar un usuario
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

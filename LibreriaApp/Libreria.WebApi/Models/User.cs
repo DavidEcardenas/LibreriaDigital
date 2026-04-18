@@ -8,7 +8,6 @@
         public string Correo { get; set; } = string.Empty;
         public string Contra { get; set; } = string.Empty;
 
-        
         public ICollection<Libro> Libros { get; set; } = new List<Libro>();
     }
 }
